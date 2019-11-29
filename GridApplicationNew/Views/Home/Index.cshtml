@@ -1,0 +1,32 @@
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<ejs-grid id="Grid" dataSource="@ViewBag.DataSource" allowExcelExport="true" toolbarClick="toolbarClick" toolbar="@(new List<string>() { "ExcelExport" })" allowPaging="true" allowSorting="true">
+  <e-grid-columns>
+    <e-grid-column field="OrderID" headerText="Order ID" type="number" textAlign="Right" width="120"></e-grid-column>
+    <e-grid-column field="CustomerID" headerText="Customer ID" type="string" width="140"></e-grid-column>
+    <e-grid-column field="Freight" headerText="Freight" textAlign="Right" format="C2" width="120"></e-grid-column>
+    <e-grid-column field="ShipCity" headerText="Ship City" type="string" width="140"></e-grid-column>
+    <e-grid-column field="ShipCountry" headerText="Ship Country" type="string" width="140"></e-grid-column>
+    <e-grid-column field="OrderDate" headerText="Order Date" format='yMd' textAlign="Right" width="140"></e-grid-column>
+  </e-grid-columns>
+</ejs-grid>
+
+<script>
+  function toolbarClick(args) {
+    var gridObj = document.getElementById("Grid").ej2_instances[0];
+    if (args.item.id === 'Grid_excelexport') {
+      var appendExcelExportProperties = {
+        multipleExport: { type: 'NewSheet' }
+      };
+      var GridExport = gridObj.excelExport(appendExcelExportProperties, true);
+      GridExport.then(function (workbook) {
+        workbook.worksheets[0].rows.splice(0, 1);
+        workbook.worksheets[0].rows.filter((e) => { return e.index = e.index - 1 });
+        const book = new ej.excelexport.Workbook(workbook, 'xlsx');
+        book.save('ExcelFile.xlsx');
+      });
+    }
+  }
+</script>
