@@ -2,6 +2,10 @@
 
 This sample demonstrates exporting the Syncfusion EJ2 ASP.NET Core DataGrid to an Excel file without its column headers.
 
+## Repository Description
+
+This repository demonstrates how to export a Syncfusion EJ2 ASP.NET Core DataGrid to Excel without including column headers. It provides a practical example of customizing the default Excel export behavior using server-side logic in an ASP.NET Core MVC application.
+
 ## Project Overview
 
 This ASP.NET Core (.NET 8) MVC application showcases an Excel export customization for the Syncfusion EJ2 DataGrid. By default, the DataGrid includes column headers in Excel exports. This sample overrides that behavior to export only the data rows — useful when headers are not required in the output.
